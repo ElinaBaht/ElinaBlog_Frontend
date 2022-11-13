@@ -5,14 +5,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import styles from './Post.module.scss';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import { PostSkeleton } from './PostSkeleton';
 
 const Post = ({
-     isEditable,
+    isEditable,
     _id,
     title,
     imageUrl,
-    isFullPost
+    isFullPost,
+    isLoading
 }) => {
+  if(isLoading)
+  {
+    return <PostSkeleton/>
+  }
 
   const onClickRemove = () => {}
 
