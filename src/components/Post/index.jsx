@@ -3,27 +3,34 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import styles from './Post.module.scss';
+import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import { PostSkeleton } from './PostSkeleton';
 
 const Post = ({
-    _id,
-    title,
-    createdAt,
-    imageUrl,
-    user,
     isEditable,
+    id,
+    title,
+    imageUrl,
+    isFullPost,
+    isLoading
 }) => {
+  if(isLoading)
+  {
+    return <PostSkeleton/>
+  }
 
   const onClickRemove = () => {}
 
   return (
-    <div >
+    <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <a href="">
+          <Link to={`/posts/${id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
-          </a>
+          </Link>
           <IconButton onClick={onClickRemove} color="secondary">
             <DeleteIcon />
           </IconButton>
@@ -31,18 +38,18 @@ const Post = ({
       )}
       {imageUrl && (
         <img
-          className={styles.image}
+          className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
           src={imageUrl}
           alt={title}
         />
       )}
       <div className={styles.wrapper}>
-        {/* <UserInfo {...user} additionalText={createdAt} /> */}
+        
         <div className={styles.indention}>
-          <h2 className={styles.title}>
-            {/* {isFullPost ? title : <a href="">{title}</a>} */}
+          <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
+            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
           </h2>
-          {/* {children && <div className={styles.content}>{children}</div>} */}
+          
         </div>
       </div>
     </div>
