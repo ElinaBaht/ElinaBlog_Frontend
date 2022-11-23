@@ -9,7 +9,7 @@ import { PostSkeleton } from './PostSkeleton';
 
 const Post = ({
     isEditable,
-    _id,
+    id,
     title,
     imageUrl,
     isFullPost,
@@ -26,7 +26,7 @@ const Post = ({
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <Link to={`/posts/${_id}/edit`}>
+          <Link to={`/posts/${id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -47,7 +47,7 @@ const Post = ({
         
         <div className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/posts/${_id}`}>{title}</Link>}
+            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
           </h2>
           
         </div>
